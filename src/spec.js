@@ -18,9 +18,7 @@ describe('styletron-connect/connect', () => {
     const styletron = new Styletron();
     const styleMap = { test: true };
     const atomicStyles = { test: 'some classnames' };
-    const stub = sinon
-      .stub(internals, 'getStylesProp')
-      .returns(atomicStyles);
+    const stub = sinon.stub(internals, 'getStylesProp').returns(atomicStyles);
 
     const HOC = connect(Mock, styleMap);
     const wrapper = shallow(<HOC />, { context: { styletron } });
@@ -49,9 +47,7 @@ describe('styletron-connect/connect', () => {
     const styleMap = { test: true };
     const atomicStyles = { test: 'some classnames' };
     const key = 'booty';
-    const stub = sinon
-      .stub(internals, 'getStylesProp')
-      .returns(atomicStyles);
+    const stub = sinon.stub(internals, 'getStylesProp').returns(atomicStyles);
 
     const HOC = connect(Mock, styleMap, key);
     const wrapper = shallow(<HOC />, { context: { styletron } });
@@ -138,14 +134,12 @@ describe('styletron-connect/stylesHandlers:object', () => {
 describe('styletron-connect/stylesHandlers:function', () => {
   it('resolves function with passed props, and passes to handler', () => {
     const styletron = new Styletron();
-    const stub = sinon
-      .stub(styletronUtils, 'injectStyle')
-      .returns('classname');
+    const stub = sinon.stub(styletronUtils, 'injectStyle').returns('classname');
 
     const spy = sinon.spy(stylesHandlers, 'object');
 
-    const resolveStyles = (props) => ({
-      col: { someCSSProperty: `${props.width}` }
+    const resolveStyles = props => ({
+      col: { someCSSProperty: `${props.width}` },
     });
 
     const props = { width: 100 };
@@ -166,7 +160,7 @@ describe('styletron-connect/stylesHandlers:function', () => {
 
 describe('styletron-connect/stylesHandlers:default', () => {
   it('throws an exception for unhandled types', () => {
-    const fn = (st) => () => stylesHandlers.default(st);
+    const fn = st => () => stylesHandlers.default(st);
     expect(fn(null)).to.throw;
     expect(fn(12)).to.throw;
     expect(fn(['hey'])).to.throw;

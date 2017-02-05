@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rm -rf lib/ && babel src --out-dir lib --copy-files",
+    "prepublish": "yarn build",
     "fmt": "prettier --single-quote --trailing-comma --parser flow --write 'src/**/*.js'",
     "test": "mocha"
   },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { getStylesProp } from './internals';
 
-const connect = (Component, styles, key = 'styles') => {
+const connectStyles = (Component, styles, key = 'styles') => {
   const StyledElement = (props, { styletron }) => {
     return React.createElement(Component, {
       ...props,
@@ -9,7 +9,9 @@ const connect = (Component, styles, key = 'styles') => {
     });
   };
 
-  if (Component.displayName || Component.name) StyledElement.displayName = `Styled:${Component.displayName || Component.name}`;
+  if (Component.displayName || Component.name)
+    StyledElement.displayName = `Styled:${Component.displayName ||
+      Component.name}`;
 
   StyledElement.contextTypes = {
     styletron: React.PropTypes.object.isRequired,
@@ -18,4 +20,4 @@ const connect = (Component, styles, key = 'styles') => {
   return StyledElement;
 };
 
-export default connect;
+export default connectStyles;
