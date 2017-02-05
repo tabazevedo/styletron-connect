@@ -42,14 +42,16 @@ export default connectStyles(Panel, {
 import connectStyles from 'styletron-connect';
 
 const Panel = ({ styles, children }) => (
-  <div className={styles.main}>
+  <div className={styles.panel}>
     {children}
   </div>
 );
 
 export default connectStyles(Panel, (props) => ({
-  backgroundColor: props.alert ? 'orange' : 'lightblue',
-  fontSize: '12px'
+  panel: {
+    backgroundColor: props.alert ? 'orange' : 'lightblue',
+    fontSize: '12px'
+  }
 }));
 
 <Panel alert>Danger!</Panel>
