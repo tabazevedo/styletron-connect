@@ -6,11 +6,12 @@ import sinon from 'sinon';
 import Styletron from 'styletron-server';
 import styletronUtils from 'styletron-utils';
 
-import * as styletronConnect from './index';
+import connect from './index';
+import * as internals from './internals';
 
 const Mock = () => <span />;
 
-const { default: connect, getStylesProp, stylesHandlers } = styletronConnect;
+const { getStylesProp, stylesHandlers } = internals;
 
 describe('styletron-connect/connect', () => {
   it('returns a higher order component which resolves styles', () => {
@@ -18,7 +19,7 @@ describe('styletron-connect/connect', () => {
     const styleMap = { test: true };
     const atomicStyles = { test: 'some classnames' };
     const stub = sinon
-      .stub(styletronConnect, 'getStylesProp')
+      .stub(internals, 'getStylesProp')
       .returns(atomicStyles);
 
     const HOC = connect(Mock, styleMap);
@@ -33,7 +34,7 @@ describe('styletron-connect/connect', () => {
     const styletron = new Styletron();
     const styleMap = { test: true };
     const props = { hello: 'world' };
-    const stub = sinon.stub(styletronConnect, 'getStylesProp').returns(styleMap);
+    const stub = sinon.stub(internals, 'getStylesProp').returns(styleMap);
 
     const HOC = connect(Mock, styleMap);
     const wrapper = shallow(<HOC {...props} />, { context: { styletron } });
@@ -49,7 +50,7 @@ describe('styletron-connect/connect', () => {
     const atomicStyles = { test: 'some classnames' };
     const key = 'booty';
     const stub = sinon
-      .stub(styletronConnect, 'getStylesProp')
+      .stub(internals, 'getStylesProp')
       .returns(atomicStyles);
 
     const HOC = connect(Mock, styleMap, key);
