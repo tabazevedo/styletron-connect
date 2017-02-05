@@ -2,6 +2,8 @@
 
 [![Build Status](https://circleci.com/gh/tabazevedo/styletron-connect.svg?style=shield)](https://circleci.com/gh/tabazevedo/styletron-connect)
 
+`npm install --save styletron-connect`
+
 ### What is it?
 
 `styletron-connect` provides an alternative higher-level API to styletron-react.
