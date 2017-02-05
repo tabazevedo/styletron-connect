@@ -6,19 +6,19 @@ import sinon from 'sinon';
 import Styletron from 'styletron-server';
 import styletronUtils from 'styletron-utils';
 
-import * as styletronMap from './index';
+import * as styletronConnect from './index';
 
 const Mock = () => <span />;
 
-const { default: connect, getStylesProp, stylesHandlers } = styletronMap;
+const { default: connect, getStylesProp, stylesHandlers } = styletronConnect;
 
-describe('styletron-map/connect', () => {
+describe('styletron-connect/connect', () => {
   it('returns a higher order component which resolves styles', () => {
     const styletron = new Styletron();
     const styleMap = { test: true };
     const atomicStyles = { test: 'some classnames' };
     const stub = sinon
-      .stub(styletronMap, 'getStylesProp')
+      .stub(styletronConnect, 'getStylesProp')
       .returns(atomicStyles);
 
     const HOC = connect(Mock, styleMap);
@@ -26,7 +26,6 @@ describe('styletron-map/connect', () => {
 
     expect(stub).to.have.been.calledWith(styleMap, styletron, {});
     expect(wrapper.find(Mock).props()).to.contain({ styles: atomicStyles });
-//
     stub.restore();
   });
 
@@ -34,7 +33,7 @@ describe('styletron-map/connect', () => {
     const styletron = new Styletron();
     const styleMap = { test: true };
     const props = { hello: 'world' };
-    const stub = sinon.stub(styletronMap, 'getStylesProp').returns(styleMap);
+    const stub = sinon.stub(styletronConnect, 'getStylesProp').returns(styleMap);
 
     const HOC = connect(Mock, styleMap);
     const wrapper = shallow(<HOC {...props} />, { context: { styletron } });
@@ -50,7 +49,7 @@ describe('styletron-map/connect', () => {
     const atomicStyles = { test: 'some classnames' };
     const key = 'booty';
     const stub = sinon
-      .stub(styletronMap, 'getStylesProp')
+      .stub(styletronConnect, 'getStylesProp')
       .returns(atomicStyles);
 
     const HOC = connect(Mock, styleMap, key);
@@ -62,7 +61,7 @@ describe('styletron-map/connect', () => {
   });
 });
 
-describe('styletron-map/getStylesProp', () => {
+describe('styletron-connect/getStylesProp', () => {
   it('passes arguments to correct handler based on passed type', () => {
     const styletron = new Styletron();
     const props = {};
@@ -89,7 +88,7 @@ describe('styletron-map/getStylesProp', () => {
   });
 });
 
-describe('styletron-map/stylesHandlers:object', () => {
+describe('styletron-connect/stylesHandlers:object', () => {
   it('maps object values to atomic classes when value is an object', () => {
     const styletron = new Styletron();
     const stub = sinon.stub(styletronUtils, 'injectStyle').returns('classname');
@@ -135,7 +134,7 @@ describe('styletron-map/stylesHandlers:object', () => {
   });
 });
 
-describe('styletron-map/stylesHandlers:function', () => {
+describe('styletron-connect/stylesHandlers:function', () => {
   it('resolves function with passed props, and passes to handler', () => {
     const styletron = new Styletron();
     const stub = sinon
@@ -161,5 +160,15 @@ describe('styletron-map/stylesHandlers:function', () => {
 
     stub.restore();
     spy.restore();
+  });
+});
+
+describe('styletron-connect/stylesHandlers:default', () => {
+  it('throws an exception for unhandled types', () => {
+    const fn = (st) => () => stylesHandlers.default(st);
+    expect(fn(null)).to.throw;
+    expect(fn(12)).to.throw;
+    expect(fn(['hey'])).to.throw;
+    expect(fn(undefined)).to.throw;
   });
 });
