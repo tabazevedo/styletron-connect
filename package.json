@@ -1,0 +1,40 @@
+{
+  "name": "styletron-connect",
+  "version": "0.0.1",
+  "description": "A high-level interface to styletron, similar to react-redux's connect",
+  "main": "index.js",
+  "repository": "https://github.com/tabazevedo/styletron-connect",
+  "author": "Tiago Azevedo <tabazevedo@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "rm -rf lib/ && babel src --out-dir lib --copy-files",
+    "fmt": "prettier --single-quote --trailing-comma --parser flow --write 'src/**/*.js'",
+    "test": "mocha"
+  },
+  "peerDependencies": {
+    "react": "^15.4.2"
+  },
+  "dependencies": {
+    "styletron-utils": "^2.5.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.22.1",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.22.0",
+    "babel-preset-env": "^1.1.8",
+    "babel-preset-react": "^6.22.0",
+    "chai": "^3.5.0",
+    "enzyme": "^2.7.1",
+    "mocha": "^3.2.0",
+    "mocha-junit-reporter": "^1.13.0",
+    "mocha-multi-reporters": "^1.1.3",
+    "prettier": "^0.15.0",
+    "react": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "sinon": "^1.17.7",
+    "sinon-chai": "^2.8.0",
+    "styletron-server": "^2.5.1"
+  }
+}
