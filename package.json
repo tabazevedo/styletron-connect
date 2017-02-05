@@ -1,6 +1,6 @@
 {
   "name": "styletron-connect",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A high-level interface to styletron, similar to react-redux's connect",
   "main": "index.js",
   "repository": "https://github.com/tabazevedo/styletron-connect",
