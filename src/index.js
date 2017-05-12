@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { getStylesProp } from './internals';
 
 const connectStyles = (Component, styles, key = 'styles') => {
@@ -14,7 +15,7 @@ const connectStyles = (Component, styles, key = 'styles') => {
       Component.name}`;
 
   StyledElement.contextTypes = {
-    styletron: React.PropTypes.object.isRequired,
+    styletron: PropTypes.object.isRequired,
   };
 
   return StyledElement;
