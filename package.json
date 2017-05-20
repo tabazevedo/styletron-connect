@@ -20,7 +20,8 @@
     "react": "^15.x.x"
   },
   "dependencies": {
-    "styletron-utils": "^2.5.1"
+    "styletron-utils": "^2.5.1",
+    "prop-types": "^15.x.x"
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",
